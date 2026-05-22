@@ -1,0 +1,74 @@
+2026-05-22T13:54:54+01:00	INFO	[vuln] Vulnerability scanning is enabled
+2026-05-22T13:54:54+01:00	INFO	[secret] Secret scanning is enabled
+2026-05-22T13:54:54+01:00	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2026-05-22T13:54:54+01:00	INFO	[secret] Please see https://trivy.dev/docs/v0.69/guide/scanner/secret#recommendation for faster secret detection
+2026-05-22T13:54:58+01:00	INFO	Detected OS	family="alpine" version="3.18.2"
+2026-05-22T13:54:58+01:00	INFO	[alpine] Detecting vulnerabilities...	os_version="3.18" repository="3.18" pkg_num=24
+2026-05-22T13:54:58+01:00	INFO	Number of language-specific files	num=0
+2026-05-22T13:54:58+01:00	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.69/guide/scanner/vulnerability#severity-selection for details.
+2026-05-22T13:54:58+01:00	WARN	This OS version is no longer supported by the distribution	family="alpine" version="3.18.2"
+2026-05-22T13:54:58+01:00	WARN	The vulnerability detection may be insufficient because security updates are not provided
+
+Report Summary
+
+┌─────────────────────────────────────────────────────────────────────────────┬────────┬─────────────────┬─────────┐
+│                                   Target                                    │  Type  │ Vulnerabilities │ Secrets │
+├─────────────────────────────────────────────────────────────────────────────┼────────┼─────────────────┼─────────┤
+│ gcr.io/google-samples/microservices-demo/cartservice:v0.8.0 (alpine 3.18.2) │ alpine │       11        │    -    │
+└─────────────────────────────────────────────────────────────────────────────┴────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+gcr.io/google-samples/microservices-demo/cartservice:v0.8.0 (alpine 3.18.2)
+===========================================================================
+Total: 11 (HIGH: 7, CRITICAL: 4)
+
+┌───────────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬──────────────────────────────────────────────────────────┐
+│    Library    │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                          Title                           │
+├───────────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼──────────────────────────────────────────────────────────┤
+│ busybox       │ CVE-2022-48174 │ CRITICAL │ fixed  │ 1.36.1-r0         │ 1.36.1-r1     │ busybox: stack overflow vulnerability in ash.c leads to  │
+│               │                │          │        │                   │               │ arbitrary code execution                                 │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-48174               │
+├───────────────┤                │          │        │                   │               │                                                          │
+│ busybox-binsh │                │          │        │                   │               │                                                          │
+│               │                │          │        │                   │               │                                                          │
+│               │                │          │        │                   │               │                                                          │
+├───────────────┼────────────────┤          │        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────┤
+│ krb5-libs     │ CVE-2024-37371 │          │        │ 1.20.1-r1         │ 1.20.2-r1     │ krb5: GSS message token handling                         │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-37371               │
+│               ├────────────────┼──────────┤        │                   │               ├──────────────────────────────────────────────────────────┤
+│               │ CVE-2024-37370 │ HIGH     │        │                   │               │ krb5: GSS message token handling                         │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-37370               │
+├───────────────┼────────────────┤          │        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────┤
+│ libcrypto3    │ CVE-2023-5363  │          │        │ 3.1.1-r1          │ 3.1.4-r0      │ openssl: Incorrect cipher key and IV length processing   │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-5363                │
+│               ├────────────────┤          │        │                   ├───────────────┼──────────────────────────────────────────────────────────┤
+│               │ CVE-2024-6119  │          │        │                   │ 3.1.7-r0      │ openssl: Possible denial of service in X.509 name checks │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-6119                │
+├───────────────┼────────────────┤          │        │                   ├───────────────┼──────────────────────────────────────────────────────────┤
+│ libssl3       │ CVE-2023-5363  │          │        │                   │ 3.1.4-r0      │ openssl: Incorrect cipher key and IV length processing   │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-5363                │
+│               ├────────────────┤          │        │                   ├───────────────┼──────────────────────────────────────────────────────────┤
+│               │ CVE-2024-6119  │          │        │                   │ 3.1.7-r0      │ openssl: Possible denial of service in X.509 name checks │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-6119                │
+├───────────────┼────────────────┤          │        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────┤
+│ musl          │ CVE-2025-26519 │          │        │ 1.2.4-r0          │ 1.2.4-r3      │ musl libc 0.9.13 through 1.2.5 before 1.2.6 has an       │
+│               │                │          │        │                   │               │ out-of-bounds write ......                               │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2025-26519               │
+├───────────────┤                │          │        │                   │               │                                                          │
+│ musl-utils    │                │          │        │                   │               │                                                          │
+│               │                │          │        │                   │               │                                                          │
+│               │                │          │        │                   │               │                                                          │
+├───────────────┼────────────────┼──────────┤        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────┤
+│ ssl_client    │ CVE-2022-48174 │ CRITICAL │        │ 1.36.1-r0         │ 1.36.1-r1     │ busybox: stack overflow vulnerability in ash.c leads to  │
+│               │                │          │        │                   │               │ arbitrary code execution                                 │
+│               │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-48174               │
+└───────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴──────────────────────────────────────────────────────────┘
+
+📣 [34mNotices:[0m
+  - Version 0.70.0 of Trivy is now available, current version is 0.69.3
+
+To suppress version checks, run Trivy scans with the --skip-version-check flag
+

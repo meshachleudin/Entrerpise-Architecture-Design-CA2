@@ -1,0 +1,13 @@
+Pod                                           Container                 RunAsNonRoot    Privileged
+-----------------------------------------------------------------------------------------------
+adservice-64dd5464b8-q8hzd                    server                    NOT SET         False
+cartservice-57b4797664-tg8sw                  server                    NOT SET         False
+checkoutservice-dcf4c5c7b-jbbfd               server                    NOT SET         False
+currencyservice-8fdf6cf9d-v7wcb               server                    NOT SET         False
+emailservice-588bb96b8-nr5f6                  server                    NOT SET         False
+frontend-759775d795-rhbxg                     server                    NOT SET         False
+paymentservice-66c65775b-kp567                server                    NOT SET         False
+productcatalogservice-c4cfd98fb-b2rd8         server                    NOT SET         False
+recommendationservice-b5b5bfc56-s68rf         server                    NOT SET         False
+redis-cart-6899b65948-9rhp2                   redis                     NOT SET         False
+shippingservice-5dcc4d7bd-5v2c2               server                    NOT SET         False

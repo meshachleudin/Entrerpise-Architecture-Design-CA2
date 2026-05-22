@@ -1,0 +1,107 @@
+NAMESPACE     NAME                                                         READY   STATUS             RESTARTS         AGE
+default       pod/adservice-64dd5464b8-vpk96                               1/1     Running            0                56m
+default       pod/cartservice-7956c8c845-s9m6j                             0/1     CrashLoopBackOff   13 (2m30s ago)   56m
+default       pod/checkoutservice-dcf4c5c7b-ph2mm                          1/1     Running            0                56m
+default       pod/currencyservice-8fdf6cf9d-p6txx                          1/1     Running            0                56m
+default       pod/emailservice-588bb96b8-kx49m                             1/1     Running            1 (54m ago)      56m
+default       pod/frontend-759775d795-4wh85                                1/1     Running            0                56m
+default       pod/loadgenerator-5c7cbd94ff-dx46m                           1/1     Running            0                56m
+default       pod/paymentservice-66c65775b-l8p56                           1/1     Running            0                56m
+default       pod/productcatalogservice-c4cfd98fb-prblq                    1/1     Running            0                56m
+default       pod/recommendationservice-b5b5bfc56-jh92w                    1/1     Running            0                56m
+default       pod/redis-cart-6899b65948-4h4rj                              1/1     Running            0                56m
+default       pod/shippingservice-5dcc4d7bd-b9lrl                          1/1     Running            0                56m
+kube-system   pod/coredns-7d764666f9-5995z                                 1/1     Running            0                57m
+kube-system   pod/etcd-minikube                                            1/1     Running            0                57m
+kube-system   pod/kube-apiserver-minikube                                  1/1     Running            0                57m
+kube-system   pod/kube-controller-manager-minikube                         1/1     Running            0                57m
+kube-system   pod/kube-proxy-7z9jn                                         1/1     Running            0                57m
+kube-system   pod/kube-scheduler-minikube                                  1/1     Running            0                57m
+kube-system   pod/storage-provisioner                                      1/1     Running            0                57m
+monitoring    pod/alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running            0                43m
+monitoring    pod/loki-0                                                   1/1     Running            0                31m
+monitoring    pod/loki-promtail-cvk2q                                      1/1     Running            0                31m
+monitoring    pod/monitoring-grafana-59bc5754cc-w76bg                      3/3     Running            0                44m
+monitoring    pod/monitoring-kube-prometheus-operator-565557d4fb-m2tlq     1/1     Running            0                44m
+monitoring    pod/monitoring-kube-state-metrics-5957bd45bc-ccx8x           1/1     Running            0                44m
+monitoring    pod/monitoring-prometheus-node-exporter-56ngc                1/1     Running            0                44m
+monitoring    pod/prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running            0                43m
+
+NAMESPACE     NAME                                                         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                        AGE
+default       service/adservice                                            ClusterIP      10.109.164.189   <none>        9555/TCP                       56m
+default       service/cartservice                                          ClusterIP      10.108.160.107   <none>        7070/TCP                       56m
+default       service/checkoutservice                                      ClusterIP      10.105.117.101   <none>        5050/TCP                       56m
+default       service/currencyservice                                      ClusterIP      10.105.212.179   <none>        7000/TCP                       56m
+default       service/emailservice                                         ClusterIP      10.105.243.197   <none>        5000/TCP                       56m
+default       service/frontend                                             ClusterIP      10.104.4.42      <none>        80/TCP                         56m
+default       service/frontend-external                                    LoadBalancer   10.96.222.48     <pending>     80:30942/TCP                   56m
+default       service/kubernetes                                           ClusterIP      10.96.0.1        <none>        443/TCP                        57m
+default       service/paymentservice                                       ClusterIP      10.103.64.235    <none>        50051/TCP                      56m
+default       service/productcatalogservice                                ClusterIP      10.105.246.70    <none>        3550/TCP                       56m
+default       service/recommendationservice                                ClusterIP      10.98.208.141    <none>        8080/TCP                       56m
+default       service/redis-cart                                           ClusterIP      10.103.227.255   <none>        6379/TCP                       56m
+default       service/shippingservice                                      ClusterIP      10.96.224.142    <none>        50051/TCP                      56m
+kube-system   service/kube-dns                                             ClusterIP      10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP         57m
+kube-system   service/monitoring-kube-prometheus-coredns                   ClusterIP      None             <none>        9153/TCP                       44m
+kube-system   service/monitoring-kube-prometheus-kube-controller-manager   ClusterIP      None             <none>        10257/TCP                      44m
+kube-system   service/monitoring-kube-prometheus-kube-etcd                 ClusterIP      None             <none>        2381/TCP                       44m
+kube-system   service/monitoring-kube-prometheus-kube-proxy                ClusterIP      None             <none>        10249/TCP                      44m
+kube-system   service/monitoring-kube-prometheus-kube-scheduler            ClusterIP      None             <none>        10259/TCP                      44m
+kube-system   service/monitoring-kube-prometheus-kubelet                   ClusterIP      None             <none>        10250/TCP,4194/TCP,10255/TCP   43m
+monitoring    service/alertmanager-operated                                ClusterIP      None             <none>        9093/TCP,9094/TCP,9094/UDP     43m
+monitoring    service/loki                                                 ClusterIP      10.102.99.233    <none>        3100/TCP                       31m
+monitoring    service/loki-headless                                        ClusterIP      None             <none>        3100/TCP                       31m
+monitoring    service/loki-memberlist                                      ClusterIP      None             <none>        7946/TCP                       31m
+monitoring    service/monitoring-grafana                                   ClusterIP      10.107.81.235    <none>        80/TCP                         44m
+monitoring    service/monitoring-kube-prometheus-alertmanager              ClusterIP      10.106.176.190   <none>        9093/TCP,8080/TCP              44m
+monitoring    service/monitoring-kube-prometheus-operator                  ClusterIP      10.108.67.138    <none>        443/TCP                        44m
+monitoring    service/monitoring-kube-prometheus-prometheus                ClusterIP      10.100.70.161    <none>        9090/TCP,8080/TCP              44m
+monitoring    service/monitoring-kube-state-metrics                        ClusterIP      10.96.191.237    <none>        8080/TCP                       44m
+monitoring    service/monitoring-prometheus-node-exporter                  ClusterIP      10.99.61.86      <none>        9100/TCP                       44m
+monitoring    service/prometheus-operated                                  ClusterIP      None             <none>        9090/TCP                       43m
+
+NAMESPACE     NAME                                                 DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   daemonset.apps/kube-proxy                            1         1         1       1            1           kubernetes.io/os=linux   57m
+monitoring    daemonset.apps/loki-promtail                         1         1         1       1            1           <none>                   31m
+monitoring    daemonset.apps/monitoring-prometheus-node-exporter   1         1         1       1            1           kubernetes.io/os=linux   44m
+
+NAMESPACE     NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
+default       deployment.apps/adservice                             1/1     1            1           56m
+default       deployment.apps/cartservice                           0/1     1            0           56m
+default       deployment.apps/checkoutservice                       1/1     1            1           56m
+default       deployment.apps/currencyservice                       1/1     1            1           56m
+default       deployment.apps/emailservice                          1/1     1            1           56m
+default       deployment.apps/frontend                              1/1     1            1           56m
+default       deployment.apps/loadgenerator                         1/1     1            1           56m
+default       deployment.apps/paymentservice                        1/1     1            1           56m
+default       deployment.apps/productcatalogservice                 1/1     1            1           56m
+default       deployment.apps/recommendationservice                 1/1     1            1           56m
+default       deployment.apps/redis-cart                            1/1     1            1           56m
+default       deployment.apps/shippingservice                       1/1     1            1           56m
+kube-system   deployment.apps/coredns                               1/1     1            1           57m
+monitoring    deployment.apps/monitoring-grafana                    1/1     1            1           44m
+monitoring    deployment.apps/monitoring-kube-prometheus-operator   1/1     1            1           44m
+monitoring    deployment.apps/monitoring-kube-state-metrics         1/1     1            1           44m
+
+NAMESPACE     NAME                                                             DESIRED   CURRENT   READY   AGE
+default       replicaset.apps/adservice-64dd5464b8                             1         1         1       56m
+default       replicaset.apps/cartservice-7956c8c845                           1         1         0       56m
+default       replicaset.apps/checkoutservice-dcf4c5c7b                        1         1         1       56m
+default       replicaset.apps/currencyservice-8fdf6cf9d                        1         1         1       56m
+default       replicaset.apps/emailservice-588bb96b8                           1         1         1       56m
+default       replicaset.apps/frontend-759775d795                              1         1         1       56m
+default       replicaset.apps/loadgenerator-5c7cbd94ff                         1         1         1       56m
+default       replicaset.apps/paymentservice-66c65775b                         1         1         1       56m
+default       replicaset.apps/productcatalogservice-c4cfd98fb                  1         1         1       56m
+default       replicaset.apps/recommendationservice-b5b5bfc56                  1         1         1       56m
+default       replicaset.apps/redis-cart-6899b65948                            1         1         1       56m
+default       replicaset.apps/shippingservice-5dcc4d7bd                        1         1         1       56m
+kube-system   replicaset.apps/coredns-7d764666f9                               1         1         1       57m
+monitoring    replicaset.apps/monitoring-grafana-59bc5754cc                    1         1         1       44m
+monitoring    replicaset.apps/monitoring-kube-prometheus-operator-565557d4fb   1         1         1       44m
+monitoring    replicaset.apps/monitoring-kube-state-metrics-5957bd45bc         1         1         1       44m
+
+NAMESPACE    NAME                                                                    READY   AGE
+monitoring   statefulset.apps/alertmanager-monitoring-kube-prometheus-alertmanager   1/1     43m
+monitoring   statefulset.apps/loki                                                   1/1     31m
+monitoring   statefulset.apps/prometheus-monitoring-kube-prometheus-prometheus       1/1     43m

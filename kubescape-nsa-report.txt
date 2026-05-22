@@ -1,0 +1,174 @@
+{"level":"info","ts":"2026-05-22T13:59:30+01:00","msg":"Kubescape scanner initializing..."}
+{"level":"warn","ts":"2026-05-22T13:59:32+01:00","msg":"current version '4.0.8' is not updated to the latest release: 'v3.0.15'"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"node-agent detected, using CRD-based host sensor"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Using CRD-based host sensor data collection (no deployment needed)"}
+{"level":"warn","ts":"2026-05-22T13:59:32+01:00","msg":"node-agent status: Failed to list OsReleaseFile CRDs - node-agent may not be deployed","error":"the server could not find the requested resource"}
+{"level":"error","ts":"2026-05-22T13:59:32+01:00","msg":"failed to init host scanner","error":"failed to verify CRD access: the server could not find the requested resource (ensure node-agent is deployed)"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Initialized scanner"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Loading policies..."}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Loaded policies"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Loading exceptions..."}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Loaded exceptions"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Loading account configurations..."}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Loaded account configurations"}
+{"level":"info","ts":"2026-05-22T13:59:32+01:00","msg":"Accessing Kubernetes objects..."}
+{"level":"info","ts":"2026-05-22T13:59:33+01:00","msg":"Accessed Kubernetes objects"}
+{"level":"info","ts":"2026-05-22T13:59:33+01:00","msg":"Scanning","Cluster":"minikube"}
+{"level":"info","ts":"2026-05-22T13:59:33+01:00","msg":"Done scanning","Cluster":"minikube"}
+{"level":"info","ts":"2026-05-22T13:59:33+01:00","msg":"Done aggregating results"}
+
+
+──────────────────────────────────────────────────
+
+Framework scanned: NSA
+
+╭─────────────────┬────╮
+│        Controls │ 26 │
+│          Passed │ 6  │
+│          Failed │ 18 │
+│ Action Required │ 2  │
+╰─────────────────┴────╯
+
+Failed resources by severity:
+
+╭──────────┬────╮
+│ Critical │ 0  │
+│     High │ 19 │
+│   Medium │ 73 │
+│      Low │ 5  │
+╰──────────┴────╯
+
+Run with '--verbose'/'-v' to see control failures for each resource.
+
+╭─────────────────────────────────────────────────────────────────────────╮
+│ Controls                                                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                      Severity           : Critical                      │
+│     Control Name       : Disable anonymous access to Kubelet service    │
+│                          Failed Resources   : 0                         │
+│                          All Resources      : 0                         │
+│                  % Compliance-Score : Action Required *                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                      Severity           : Critical                      │
+│      Control Name       : Enforce Kubelet client TLS authentication     │
+│                          Failed Resources   : 0                         │
+│                          All Resources      : 0                         │
+│                  % Compliance-Score : Action Required *                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                        Severity           : High                        │
+│   Control Name       : Applications credentials in configuration files  │
+│                          Failed Resources   : 1                         │
+│                         All Resources      : 46                         │
+│                         % Compliance-Score : 98%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                        Severity           : High                        │
+│               Control Name       : Host PID/IPC privileges              │
+│                          Failed Resources   : 1                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 96%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                        Severity           : High                        │
+│                 Control Name       : HostNetwork access                 │
+│                          Failed Resources   : 1                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 96%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                        Severity           : High                        │
+│              Control Name       : Ensure CPU limits are set             │
+│                          Failed Resources   : 8                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 70%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                        Severity           : High                        │
+│            Control Name       : Ensure memory limits are set            │
+│                          Failed Resources   : 8                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 70%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│ Control Name       : Prevent containers from allowing command execution │
+│                          Failed Resources   : 1                         │
+│                         All Resources      : 84                         │
+│                         % Compliance-Score : 99%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│                 Control Name       : Non-root containers                │
+│                          Failed Resources   : 2                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 93%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│             Control Name       : Allow privilege escalation             │
+│                          Failed Resources   : 4                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 85%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│             Control Name       : Ingress and Egress blocked             │
+│                         Failed Resources   : 20                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 26%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│        Control Name       : Automatic mapping of service account        │
+│                         Failed Resources   : 36                         │
+│                         All Resources      : 90                         │
+│                         % Compliance-Score : 60%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│                Control Name       : Administrative Roles                │
+│                          Failed Resources   : 1                         │
+│                         All Resources      : 84                         │
+│                         % Compliance-Score : 99%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│                 Control Name       : Container hostPort                 │
+│                          Failed Resources   : 1                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 96%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│             Control Name       : Cluster internal networking            │
+│                          Failed Resources   : 1                         │
+│                          All Resources      : 5                         │
+│                         % Compliance-Score : 80%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│                   Control Name       : Linux hardening                  │
+│                          Failed Resources   : 5                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 81%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│           Control Name       : Secret/etcd encryption enabled           │
+│                          Failed Resources   : 1                         │
+│                          All Resources      : 1                         │
+│                         % Compliance-Score : 0%                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                       Severity           : Medium                       │
+│                 Control Name       : Audit logs enabled                 │
+│                          Failed Resources   : 1                         │
+│                          All Resources      : 1                         │
+│                         % Compliance-Score : 0%                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                         Severity           : Low                        │
+│           Control Name       : Immutable container filesystem           │
+│                          Failed Resources   : 4                         │
+│                         All Resources      : 27                         │
+│                         % Compliance-Score : 85%                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                         Severity           : Low                        │
+│                     Control Name       : PSP enabled                    │
+│                          Failed Resources   : 1                         │
+│                          All Resources      : 1                         │
+│                         % Compliance-Score : 0%                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│ Resource Summary                                                        │
+│                                                                         │
+│ Failed Resources : 48                                                   │
+│ All Resources    : 198                                                  │
+│ % Compliance-Score    : 70.59%                                          │
+╰─────────────────────────────────────────────────────────────────────────╯
+
+🚨 * This control is scanned exclusively by the Kubescape operator, not the Kubescape CLI. Install the Kubescape operator:
+     https://kubescape.io/docs/install-operator/.

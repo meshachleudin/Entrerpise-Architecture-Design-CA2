@@ -1,0 +1,588 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    grafana.ini: |
+      [analytics]
+      check_for_updates = true
+      [grafana_net]
+      url = https://grafana.net
+      [log]
+      mode = console
+      [paths]
+      data = /var/lib/grafana/
+      logs = /var/log/grafana
+      plugins = /var/lib/grafana/plugins
+      provisioning = /etc/grafana/provisioning
+      [server]
+      domain = ''
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: grafana
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-05-22T12:22:20Z"
+    labels:
+      app.kubernetes.io/instance: grafana
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/version: 10.0.3
+      helm.sh/chart: grafana-6.58.9
+    name: grafana
+    namespace: monitoring
+    resourceVersion: "4009"
+    uid: 3af34b46-52f4-446d-9935-3a3c709f898c
+- apiVersion: v1
+  data:
+    datasources.yaml: |-
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://monitoring-prometheus-server.monitoring:80
+          isDefault: true
+          editable: true
+          jsonData:
+            timeInterval: 30s
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.monitoring:3100
+          isDefault: false
+          editable: true
+          jsonData:
+            maxLines: 1000
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"datasources.yaml":"apiVersion: 1\ndatasources:\n  - name: Prometheus\n    type: prometheus\n    access: proxy\n    url: http://monitoring-prometheus-server.monitoring:80\n    isDefault: true\n    editable: true\n    jsonData:\n      timeInterval: 30s\n  - name: Loki\n    type: loki\n    access: proxy\n    url: http://loki.monitoring:3100\n    isDefault: false\n    editable: true\n    jsonData:\n      maxLines: 1000"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"grafana","grafana_datasource":"1"},"name":"grafana-datasources","namespace":"monitoring"}}
+    creationTimestamp: "2026-05-22T11:51:14Z"
+    labels:
+      app.kubernetes.io/name: grafana
+      grafana_datasource: "1"
+    name: grafana-datasources
+    namespace: monitoring
+    resourceVersion: "2401"
+    uid: 3cf6082d-9307-4d3e-99de-c49835fb2cef
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDBjCCAe6gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p
+      a3ViZUNBMB4XDTI2MDUxODE0MDUwOVoXDTM2MDUxNjE0MDUwOVowFTETMBEGA1UE
+      AxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKD3
+      jtiC6PY4dFdcTT5yYDBfgNwxjA7D6XdWcuKbZeSXJSgAy2Ne9bAfQvt1r+N9VuvH
+      /C0qLF7dsFjSC4JnAth7ZkTqRxWhpcvq07IJ5d1SABOmcviwxATXIy7bBAndseTg
+      ymUBpvbrpx/ZPM6A5T1+qh/nesybfMs3iZ5xDPsMrdwkFE7AMnvTu4+47mpj+xz8
+      p9QmKIGK1zXbhjMak/lTAyJldlq2TpBq3EzOUm7jk8lvNmZwcLtg8EKbujzcxD3h
+      HYYDvScZ7voffvh4kblFj0usuHy/GrR/OfyN9odjGhfXx+UJBVFM9Tn0X4Rp8WEk
+      FfL02hZdfoYjj2D+J3MCAwEAAaNhMF8wDgYDVR0PAQH/BAQDAgKkMB0GA1UdJQQW
+      MBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQW
+      BBTWgt0INL583gfkd/IZD/vUzJBMVzANBgkqhkiG9w0BAQsFAAOCAQEAONmRvAxQ
+      +aNCuiKVc71GZEKTqRFuzZTQqoM9eA2D+GPqjNy4dEQjxAcNB0AG8WUoyQeIh3JU
+      j6ve6UPZjKRZWSBe9WTTy4t51kU6ruUuRJLTsApBE9szhu4YM8ey+2CIJsSjaYmi
+      2DAVxGddtCc+NlUZ+rlZC6T9QMuOTF9yMo8eQW7dbQsgM9GNV1AFDvTIm79d1eHT
+      PE/IHrEtg0PIiRSkWbVGFeH4DM1Q4cViZx5RGd4xeyQu/DIp5WOVu33ZtWy5JXoH
+      iN8TuCOO9R1lej2KBeiLu6Wp33yGAzHkIyrTHtkwsUG/5YkdoXrlS5/y8v2Oyu9u
+      CmlVi2HnDjv5qg==
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2026-05-22T11:36:17Z"
+    name: kube-root-ca.crt
+    namespace: monitoring
+    resourceVersion: "1221"
+    uid: 69959cfe-6a1f-4321-907f-ebc05b621e8e
+- apiVersion: v1
+  data:
+    loki-datasource.yaml: |-
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.monitoring:3100
+          isDefault: false
+          editable: true
+          jsonData:
+            maxLines: 1000
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"loki-datasource.yaml":"apiVersion: 1\ndatasources:\n  - name: Loki\n    type: loki\n    access: proxy\n    url: http://loki.monitoring:3100\n    isDefault: false\n    editable: true\n    jsonData:\n      maxLines: 1000"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"grafana","app.kubernetes.io/name":"grafana","grafana_datasource":"1"},"name":"loki-grafana-datasource","namespace":"monitoring"}}
+    creationTimestamp: "2026-05-22T11:45:44Z"
+    labels:
+      app.kubernetes.io/instance: grafana
+      app.kubernetes.io/name: grafana
+      grafana_datasource: "1"
+    name: loki-grafana-datasource
+    namespace: monitoring
+    resourceVersion: "2018"
+    uid: 80c5d15b-0f6a-4623-bcd3-495f5eb4c1e9
+- apiVersion: v1
+  data:
+    loki-stack-datasource.yaml: |-
+      apiVersion: 1
+      datasources:
+      - name: Loki
+        type: loki
+        access: proxy
+        url: "http://loki:3100"
+        version: 1
+        isDefault: true
+        jsonData:
+          {}
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-05-22T11:47:22Z"
+    labels:
+      app: loki-stack
+      app.kubernetes.io/managed-by: Helm
+      chart: loki-stack-2.10.3
+      grafana_datasource: "1"
+      heritage: Helm
+      release: loki
+    name: loki-loki-stack
+    namespace: monitoring
+    resourceVersion: "2153"
+    uid: 8e4f9eed-9f8f-425c-af57-c283c5815135
+- apiVersion: v1
+  data:
+    test.sh: |
+      #!/usr/bin/env bash
+
+      LOKI_URI="http://${LOKI_SERVICE}:${LOKI_PORT}"
+
+      function setup() {
+        apk add -u curl jq
+        until (curl -s ${LOKI_URI}/loki/api/v1/label/app/values | jq -e '.data[] | select(. == "loki")'); do
+          sleep 1
+        done
+      }
+
+      @test "Has labels" {
+        curl -s ${LOKI_URI}/loki/api/v1/labels | \
+        jq -e '.data[] | select(. == "app")'
+      }
+
+      @test "Query log entry" {
+        curl -sG ${LOKI_URI}/api/prom/query?limit=10 --data-urlencode 'query={app="loki"}' | \
+        jq -e '.streams[].entries | length >=1'
+      }
+
+      @test "Push log entry" {
+        local timestamp=$(date +%s000000000)
+        local data=$(jq -n --arg timestamp "${timestamp}" '{"streams": [{"stream": {"app": "loki-test"}, "values": [[$timestamp, "foobar"]]}]}')
+
+        curl -s -X POST -H "Content-Type: application/json" ${LOKI_URI}/loki/api/v1/push --data-raw "${data}"
+
+        curl -sG ${LOKI_URI}/loki/api/v1/query_range?limit=1 --data-urlencode 'query={app="loki-test"}' | \
+        jq -e '.data.result[].values[][1] == "foobar"'
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-05-22T11:47:22Z"
+    labels:
+      app: loki-stack
+      app.kubernetes.io/managed-by: Helm
+      chart: loki-stack-2.10.3
+      heritage: Helm
+      release: loki
+    name: loki-loki-stack-test
+    namespace: monitoring
+    resourceVersion: "2154"
+    uid: 56280da9-9c73-4b92-a28e-a25447735e10
+- apiVersion: v1
+  data:
+    alertmanager.yml: |
+      global: {}
+      receivers:
+      - name: default-receiver
+      route:
+        group_interval: 5m
+        group_wait: 10s
+        receiver: default-receiver
+        repeat_interval: 3h
+      templates:
+      - /etc/alertmanager/*.tmpl
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: monitoring
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-05-22T11:36:17Z"
+    labels:
+      app.kubernetes.io/instance: monitoring
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: alertmanager
+      app.kubernetes.io/version: v0.32.1
+      helm.sh/chart: alertmanager-1.37.0
+    name: monitoring-alertmanager
+    namespace: monitoring
+    resourceVersion: "1228"
+    uid: 99656c09-aa97-4933-be18-7880aa88ef9d
+- apiVersion: v1
+  data:
+    alerting_rules.yml: |
+      {}
+    alerts: |
+      {}
+    allow-snippet-annotations: "false"
+    prometheus.yml: |
+      global:
+        evaluation_interval: 1m
+        scrape_interval: 1m
+        scrape_timeout: 10s
+      scrape_configs:
+      - job_name: kubernetes-api-servers
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        kubernetes_sd_configs:
+        - role: endpointslice
+        relabel_configs:
+        - action: keep
+          regex: default;kubernetes;https
+          source_labels:
+          - __meta_kubernetes_namespace
+          - __meta_kubernetes_service_name
+          - __meta_kubernetes_endpointslice_port_name
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      - job_name: kubernetes-nodes
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        kubernetes_sd_configs:
+        - role: node
+        relabel_configs:
+        - action: labelmap
+          regex: __meta_kubernetes_node_label_(.+)
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecure_skip_verify: true
+      - job_name: kubernetes-nodes-cadvisor
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        kubernetes_sd_configs:
+        - role: node
+        metrics_path: /metrics/cadvisor
+        relabel_configs:
+        - action: labelmap
+          regex: __meta_kubernetes_node_label_(.+)
+        - source_labels:
+          - __metrics_path__
+          target_label: metrics_path
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecure_skip_verify: true
+      - job_name: kubernetes-pods
+        honor_labels: true
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - action: keep
+          regex: true
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_scrape
+        - action: drop
+          regex: true
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_scrape_slow
+        - action: replace
+          regex: (https?)
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_scheme
+          target_label: __scheme__
+        - action: replace
+          regex: (.+)
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_path
+          target_label: __metrics_path__
+        - action: replace
+          regex: (\d+);(([A-Fa-f0-9]{1,4}::?){1,7}[A-Fa-f0-9]{1,4})
+          replacement: '[$2]:$1'
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_port
+          - __meta_kubernetes_pod_ip
+          target_label: __address__
+        - action: replace
+          regex: (\d+);((([0-9]+?)(\.|$)){4})
+          replacement: $2:$1
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_port
+          - __meta_kubernetes_pod_ip
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_pod_annotation_prometheus_io_param_(.+)
+          replacement: __param_$1
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_namespace
+          target_label: namespace
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_pod_name
+          target_label: pod
+        - action: drop
+          regex: Pending|Succeeded|Failed|Completed
+          source_labels:
+          - __meta_kubernetes_pod_phase
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_pod_node_name
+          target_label: node
+      - job_name: kubernetes-pods-slow
+        honor_labels: true
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - action: keep
+          regex: true
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_scrape_slow
+        - action: replace
+          regex: (https?)
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_scheme
+          target_label: __scheme__
+        - action: replace
+          regex: (.+)
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_path
+          target_label: __metrics_path__
+        - action: replace
+          regex: (\d+);(([A-Fa-f0-9]{1,4}::?){1,7}[A-Fa-f0-9]{1,4})
+          replacement: '[$2]:$1'
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_port
+          - __meta_kubernetes_pod_ip
+          target_label: __address__
+        - action: replace
+          regex: (\d+);((([0-9]+?)(\.|$)){4})
+          replacement: $2:$1
+          source_labels:
+          - __meta_kubernetes_pod_annotation_prometheus_io_port
+          - __meta_kubernetes_pod_ip
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_pod_annotation_prometheus_io_param_(.+)
+          replacement: __param_$1
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_namespace
+          target_label: namespace
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_pod_name
+          target_label: pod
+        - action: drop
+          regex: Pending|Succeeded|Failed|Completed
+          source_labels:
+          - __meta_kubernetes_pod_phase
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_pod_node_name
+          target_label: node
+        scrape_interval: 5m
+        scrape_timeout: 30s
+      - job_name: kubernetes-service-endpoints
+        honor_labels: true
+        kubernetes_sd_configs:
+        - role: endpointslice
+        relabel_configs:
+        - action: keep
+          regex: true
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_scrape
+        - action: drop
+          regex: true
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_scrape_slow
+        - action: replace
+          regex: (https?)
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_scheme
+          target_label: __scheme__
+        - action: replace
+          regex: (.+)
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_path
+          target_label: __metrics_path__
+        - action: replace
+          regex: (.+?)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          source_labels:
+          - __address__
+          - __meta_kubernetes_service_annotation_prometheus_io_port
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_service_annotation_prometheus_io_param_(.+)
+          replacement: __param_$1
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_namespace
+          target_label: namespace
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_service_name
+          target_label: service
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_pod_node_name
+          target_label: node
+      - job_name: kubernetes-service-endpoints-slow
+        honor_labels: true
+        kubernetes_sd_configs:
+        - role: endpointslice
+        relabel_configs:
+        - action: keep
+          regex: true
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_scrape_slow
+        - action: replace
+          regex: (https?)
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_scheme
+          target_label: __scheme__
+        - action: replace
+          regex: (.+)
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_path
+          target_label: __metrics_path__
+        - action: replace
+          regex: (.+?)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          source_labels:
+          - __address__
+          - __meta_kubernetes_service_annotation_prometheus_io_port
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_service_annotation_prometheus_io_param_(.+)
+          replacement: __param_$1
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_namespace
+          target_label: namespace
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_service_name
+          target_label: service
+        - action: replace
+          source_labels:
+          - __meta_kubernetes_pod_node_name
+          target_label: node
+        scrape_interval: 5m
+        scrape_timeout: 30s
+      - job_name: kubernetes-services
+        honor_labels: true
+        kubernetes_sd_configs:
+        - role: service
+        metrics_path: /probe
+        params:
+          module:
+          - http_2xx
+        relabel_configs:
+        - action: keep
+          regex: true
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_probe
+        - source_labels:
+          - __address__
+          target_label: __param_target
+        - replacement: blackbox
+          target_label: __address__
+        - source_labels:
+          - __param_target
+          target_label: instance
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels:
+          - __meta_kubernetes_namespace
+          target_label: namespace
+        - source_labels:
+          - __meta_kubernetes_service_name
+          target_label: service
+      - job_name: prometheus
+        static_configs:
+        - targets:
+          - localhost:9090
+      - job_name: prometheus-pushgateway
+        honor_labels: true
+        kubernetes_sd_configs:
+        - role: service
+        relabel_configs:
+        - action: keep
+          regex: pushgateway
+          source_labels:
+          - __meta_kubernetes_service_annotation_prometheus_io_probe
+      rule_files:
+      - /etc/config/recording_rules.yml
+      - /etc/config/alerting_rules.yml
+      - /etc/config/rules
+      - /etc/config/alerts
+      alerting:
+        alertmanagers:
+        - kubernetes_sd_configs:
+            - role: pod
+          tls_config:
+            ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_namespace]
+            regex: monitoring
+            action: keep
+          - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_instance]
+            regex: monitoring
+            action: keep
+          - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+            regex: alertmanager
+            action: keep
+          - source_labels: [__meta_kubernetes_pod_container_port_number]
+            regex: "9093"
+            action: keep
+    recording_rules.yml: |
+      {}
+    rules: |
+      {}
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: monitoring
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-05-22T11:36:17Z"
+    labels:
+      app.kubernetes.io/component: server
+      app.kubernetes.io/instance: monitoring
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: prometheus
+      app.kubernetes.io/version: v3.11.3
+      helm.sh/chart: prometheus-29.8.0
+    name: monitoring-prometheus-server
+    namespace: monitoring
+    resourceVersion: "1229"
+    uid: 69e2e5fa-ddb0-4c4b-9f3f-cdd5e3d90daf
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,1636 @@
+2026-05-22T13:55:56+01:00	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-05-22T13:55:56+01:00	INFO	[checks-client] Need to update the checks bundle
+2026-05-22T13:55:56+01:00	INFO	[checks-client] Downloading the checks bundle...
+234.65 KiB / 234.65 KiB [---------------------------------------------------------------------------] 100.00% ? p/s 100ms2026-05-22T13:55:58+01:00	INFO	Detected config files	num=1
+
+Report Summary
+
+┌───────────────────────────┬────────────┬───────────────────┐
+│          Target           │    Type    │ Misconfigurations │
+├───────────────────────────┼────────────┼───────────────────┤
+│ kubernetes-manifests.yaml │ kubernetes │        80         │
+└───────────────────────────┴────────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+kubernetes-manifests.yaml (kubernetes)
+======================================
+Tests: 179 (SUCCESSES: 99, FAILURES: 80)
+Failures: 80 (UNKNOWN: 0, LOW: 55, MEDIUM: 25, HIGH: 0, CRITICAL: 0)
+
+KSV-0011 (LOW): Container 'frontend-check' of Deployment 'loadgenerator' should set 'resources.limits.cpu'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing CPU limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv-0011
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0013 (MEDIUM): Container 'frontend-check' of Deployment 'loadgenerator' should specify an image tag
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+It is best to avoid using the ':latest' image tag when deploying containers in production. Doing so makes it hard to track which version of the image is running, and hard to roll back the version.
+
+See https://avd.aquasec.com/misconfig/ksv-0013
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0015 (LOW): Container 'frontend-check' of Deployment 'loadgenerator' should set 'resources.requests.cpu'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv-0015
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0016 (LOW): Container 'frontend-check' of Deployment 'loadgenerator' should set 'resources.requests.memory'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv-0016
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0018 (LOW): Container 'frontend-check' of Deployment 'loadgenerator' should set 'resources.limits.memory'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing memory limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv-0018
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'frontend-check' of Deployment 'loadgenerator' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'main' of Deployment 'loadgenerator' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:149-171
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 149 ┌         env:
+ 150 │         - name: FRONTEND_ADDR
+ 151 │           value: "frontend:80"
+ 152 │       containers:
+ 153 │       - name: main
+ 154 │         securityContext:
+ 155 │           allowPrivilegeEscalation: false
+ 156 │           capabilities:
+ 157 └             drop:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'redis' of Deployment 'redis-cart' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:487-515
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 487 ┌   name: redis-cart
+ 488 │   labels:
+ 489 │     app: redis-cart
+ 490 │ spec:
+ 491 │   selector:
+ 492 │     matchLabels:
+ 493 │       app: redis-cart
+ 494 │   template:
+ 495 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'adservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:896-926
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 896 ┌   ports:
+ 897 │   - name: grpc
+ 898 │     port: 8080
+ 899 │     targetPort: 8080
+ 900 │ ---
+ 901 │ apiVersion: v1
+ 902 │ kind: ServiceAccount
+ 903 │ metadata:
+ 904 └   name: recommendationservice
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'cartservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:418-447
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 418 ┌     matchLabels:
+ 419 │       app: cartservice
+ 420 │   template:
+ 421 │     metadata:
+ 422 │       labels:
+ 423 │         app: cartservice
+ 424 │     spec:
+ 425 │       serviceAccountName: cartservice
+ 426 └       terminationGracePeriodSeconds: 5
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'checkoutservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:268-306
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 268 ┌         app: checkoutservice
+ 269 │     spec:
+ 270 │       serviceAccountName: checkoutservice
+ 271 │       securityContext:
+ 272 │         fsGroup: 1000
+ 273 │         runAsGroup: 1000
+ 274 │         runAsNonRoot: true
+ 275 │         runAsUser: 1000
+ 276 └       containers:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'currencyservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:43-72
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  43 ┌       containers:
+  44 │       - name: server
+  45 │         securityContext:
+  46 │           allowPrivilegeEscalation: false
+  47 │           capabilities:
+  48 │             drop:
+  49 │               - ALL
+  50 │           privileged: false
+  51 └           readOnlyRootFilesystem: true
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'emailservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:556-586
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 556 ┌   name: emailservice
+ 557 │   labels:
+ 558 │     app: emailservice
+ 559 │ spec:
+ 560 │   selector:
+ 561 │     matchLabels:
+ 562 │       app: emailservice
+ 563 │   template:
+ 564 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'frontend' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:699-766
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 699 ┌   name: paymentservice
+ 700 │ ---
+ 701 │ apiVersion: apps/v1
+ 702 │ kind: Deployment
+ 703 │ metadata:
+ 704 │   name: frontend
+ 705 │   labels:
+ 706 │     app: frontend
+ 707 └ spec:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'paymentservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:628-656
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 628 ┌ apiVersion: apps/v1
+ 629 │ kind: Deployment
+ 630 │ metadata:
+ 631 │   name: paymentservice
+ 632 │   labels:
+ 633 │     app: paymentservice
+ 634 │ spec:
+ 635 │   selector:
+ 636 └     matchLabels:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'productcatalogservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:199-227
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 199 ┌       securityContext:
+ 200 │         fsGroup: 1000
+ 201 │         runAsGroup: 1000
+ 202 │         runAsNonRoot: true
+ 203 │         runAsUser: 1000
+ 204 │       containers:
+ 205 │       - name: server
+ 206 │         securityContext:
+ 207 └           allowPrivilegeEscalation: false
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'recommendationservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:822-854
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 822 ┌     targetPort: 8080
+ 823 │ ---
+ 824 │ apiVersion: v1
+ 825 │ kind: ServiceAccount
+ 826 │ metadata:
+ 827 │   name: frontend
+ 828 │ ---
+ 829 │ apiVersion: apps/v1
+ 830 └ kind: Deployment
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'server' of Deployment 'shippingservice' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:347-376
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 347 ┌   template:
+ 348 │     metadata:
+ 349 │       labels:
+ 350 │         app: shippingservice
+ 351 │     spec:
+ 352 │       serviceAccountName: shippingservice
+ 353 │       securityContext:
+ 354 │         fsGroup: 1000
+ 355 └         runAsGroup: 1000
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'frontend-check' of Deployment 'loadgenerator' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'main' of Deployment 'loadgenerator' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:149-171
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 149 ┌         env:
+ 150 │         - name: FRONTEND_ADDR
+ 151 │           value: "frontend:80"
+ 152 │       containers:
+ 153 │       - name: main
+ 154 │         securityContext:
+ 155 │           allowPrivilegeEscalation: false
+ 156 │           capabilities:
+ 157 └             drop:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'redis' of Deployment 'redis-cart' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:487-515
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 487 ┌   name: redis-cart
+ 488 │   labels:
+ 489 │     app: redis-cart
+ 490 │ spec:
+ 491 │   selector:
+ 492 │     matchLabels:
+ 493 │       app: redis-cart
+ 494 │   template:
+ 495 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'adservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:896-926
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 896 ┌   ports:
+ 897 │   - name: grpc
+ 898 │     port: 8080
+ 899 │     targetPort: 8080
+ 900 │ ---
+ 901 │ apiVersion: v1
+ 902 │ kind: ServiceAccount
+ 903 │ metadata:
+ 904 └   name: recommendationservice
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'cartservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:418-447
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 418 ┌     matchLabels:
+ 419 │       app: cartservice
+ 420 │   template:
+ 421 │     metadata:
+ 422 │       labels:
+ 423 │         app: cartservice
+ 424 │     spec:
+ 425 │       serviceAccountName: cartservice
+ 426 └       terminationGracePeriodSeconds: 5
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'checkoutservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:268-306
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 268 ┌         app: checkoutservice
+ 269 │     spec:
+ 270 │       serviceAccountName: checkoutservice
+ 271 │       securityContext:
+ 272 │         fsGroup: 1000
+ 273 │         runAsGroup: 1000
+ 274 │         runAsNonRoot: true
+ 275 │         runAsUser: 1000
+ 276 └       containers:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'currencyservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:43-72
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  43 ┌       containers:
+  44 │       - name: server
+  45 │         securityContext:
+  46 │           allowPrivilegeEscalation: false
+  47 │           capabilities:
+  48 │             drop:
+  49 │               - ALL
+  50 │           privileged: false
+  51 └           readOnlyRootFilesystem: true
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'emailservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:556-586
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 556 ┌   name: emailservice
+ 557 │   labels:
+ 558 │     app: emailservice
+ 559 │ spec:
+ 560 │   selector:
+ 561 │     matchLabels:
+ 562 │       app: emailservice
+ 563 │   template:
+ 564 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'frontend' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:699-766
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 699 ┌   name: paymentservice
+ 700 │ ---
+ 701 │ apiVersion: apps/v1
+ 702 │ kind: Deployment
+ 703 │ metadata:
+ 704 │   name: frontend
+ 705 │   labels:
+ 706 │     app: frontend
+ 707 └ spec:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'paymentservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:628-656
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 628 ┌ apiVersion: apps/v1
+ 629 │ kind: Deployment
+ 630 │ metadata:
+ 631 │   name: paymentservice
+ 632 │   labels:
+ 633 │     app: paymentservice
+ 634 │ spec:
+ 635 │   selector:
+ 636 └     matchLabels:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'productcatalogservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:199-227
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 199 ┌       securityContext:
+ 200 │         fsGroup: 1000
+ 201 │         runAsGroup: 1000
+ 202 │         runAsNonRoot: true
+ 203 │         runAsUser: 1000
+ 204 │       containers:
+ 205 │       - name: server
+ 206 │         securityContext:
+ 207 └           allowPrivilegeEscalation: false
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'recommendationservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:822-854
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 822 ┌     targetPort: 8080
+ 823 │ ---
+ 824 │ apiVersion: v1
+ 825 │ kind: ServiceAccount
+ 826 │ metadata:
+ 827 │   name: frontend
+ 828 │ ---
+ 829 │ apiVersion: apps/v1
+ 830 └ kind: Deployment
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'server' of Deployment 'shippingservice' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:347-376
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 347 ┌   template:
+ 348 │     metadata:
+ 349 │       labels:
+ 350 │         app: shippingservice
+ 351 │     spec:
+ 352 │       serviceAccountName: shippingservice
+ 353 │       securityContext:
+ 354 │         fsGroup: 1000
+ 355 └         runAsGroup: 1000
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:699-766
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 699 ┌   name: paymentservice
+ 700 │ ---
+ 701 │ apiVersion: apps/v1
+ 702 │ kind: Deployment
+ 703 │ metadata:
+ 704 │   name: frontend
+ 705 │   labels:
+ 706 │     app: frontend
+ 707 └ spec:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:43-72
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  43 ┌       containers:
+  44 │       - name: server
+  45 │         securityContext:
+  46 │           allowPrivilegeEscalation: false
+  47 │           capabilities:
+  48 │             drop:
+  49 │               - ALL
+  50 │           privileged: false
+  51 └           readOnlyRootFilesystem: true
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:199-227
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 199 ┌       securityContext:
+ 200 │         fsGroup: 1000
+ 201 │         runAsGroup: 1000
+ 202 │         runAsNonRoot: true
+ 203 │         runAsUser: 1000
+ 204 │       containers:
+ 205 │       - name: server
+ 206 │         securityContext:
+ 207 └           allowPrivilegeEscalation: false
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:268-306
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 268 ┌         app: checkoutservice
+ 269 │     spec:
+ 270 │       serviceAccountName: checkoutservice
+ 271 │       securityContext:
+ 272 │         fsGroup: 1000
+ 273 │         runAsGroup: 1000
+ 274 │         runAsNonRoot: true
+ 275 │         runAsUser: 1000
+ 276 └       containers:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:347-376
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 347 ┌   template:
+ 348 │     metadata:
+ 349 │       labels:
+ 350 │         app: shippingservice
+ 351 │     spec:
+ 352 │       serviceAccountName: shippingservice
+ 353 │       securityContext:
+ 354 │         fsGroup: 1000
+ 355 └         runAsGroup: 1000
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:418-447
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 418 ┌     matchLabels:
+ 419 │       app: cartservice
+ 420 │   template:
+ 421 │     metadata:
+ 422 │       labels:
+ 423 │         app: cartservice
+ 424 │     spec:
+ 425 │       serviceAccountName: cartservice
+ 426 └       terminationGracePeriodSeconds: 5
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:896-926
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 896 ┌   ports:
+ 897 │   - name: grpc
+ 898 │     port: 8080
+ 899 │     targetPort: 8080
+ 900 │ ---
+ 901 │ apiVersion: v1
+ 902 │ kind: ServiceAccount
+ 903 │ metadata:
+ 904 └   name: recommendationservice
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:822-854
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 822 ┌     targetPort: 8080
+ 823 │ ---
+ 824 │ apiVersion: v1
+ 825 │ kind: ServiceAccount
+ 826 │ metadata:
+ 827 │   name: frontend
+ 828 │ ---
+ 829 │ apiVersion: apps/v1
+ 830 └ kind: Deployment
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:149-171
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 149 ┌         env:
+ 150 │         - name: FRONTEND_ADDR
+ 151 │           value: "frontend:80"
+ 152 │       containers:
+ 153 │       - name: main
+ 154 │         securityContext:
+ 155 │           allowPrivilegeEscalation: false
+ 156 │           capabilities:
+ 157 └             drop:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:628-656
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 628 ┌ apiVersion: apps/v1
+ 629 │ kind: Deployment
+ 630 │ metadata:
+ 631 │   name: paymentservice
+ 632 │   labels:
+ 633 │     app: paymentservice
+ 634 │ spec:
+ 635 │   selector:
+ 636 └     matchLabels:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:556-586
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 556 ┌   name: emailservice
+ 557 │   labels:
+ 558 │     app: emailservice
+ 559 │ spec:
+ 560 │   selector:
+ 561 │     matchLabels:
+ 562 │       app: emailservice
+ 563 │   template:
+ 564 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:487-515
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 487 ┌   name: redis-cart
+ 488 │   labels:
+ 489 │     app: redis-cart
+ 490 │ spec:
+ 491 │   selector:
+ 492 │     matchLabels:
+ 493 │       app: redis-cart
+ 494 │   template:
+ 495 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "frontend-check" of deployment "loadgenerator" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:118-147
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 118 ┌         runAsGroup: 1000
+ 119 │         runAsNonRoot: true
+ 120 │         runAsUser: 1000
+ 121 │       initContainers:
+ 122 │       - command:
+ 123 │         - /bin/sh
+ 124 │         - -exc
+ 125 │         - |
+ 126 └           MAX_RETRIES=12
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "main" of deployment "loadgenerator" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:149-171
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 149 ┌         env:
+ 150 │         - name: FRONTEND_ADDR
+ 151 │           value: "frontend:80"
+ 152 │       containers:
+ 153 │       - name: main
+ 154 │         securityContext:
+ 155 │           allowPrivilegeEscalation: false
+ 156 │           capabilities:
+ 157 └             drop:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "redis" of deployment "redis-cart" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:487-515
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 487 ┌   name: redis-cart
+ 488 │   labels:
+ 489 │     app: redis-cart
+ 490 │ spec:
+ 491 │   selector:
+ 492 │     matchLabels:
+ 493 │       app: redis-cart
+ 494 │   template:
+ 495 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "adservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:896-926
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 896 ┌   ports:
+ 897 │   - name: grpc
+ 898 │     port: 8080
+ 899 │     targetPort: 8080
+ 900 │ ---
+ 901 │ apiVersion: v1
+ 902 │ kind: ServiceAccount
+ 903 │ metadata:
+ 904 └   name: recommendationservice
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "cartservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:418-447
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 418 ┌     matchLabels:
+ 419 │       app: cartservice
+ 420 │   template:
+ 421 │     metadata:
+ 422 │       labels:
+ 423 │         app: cartservice
+ 424 │     spec:
+ 425 │       serviceAccountName: cartservice
+ 426 └       terminationGracePeriodSeconds: 5
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "checkoutservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:268-306
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 268 ┌         app: checkoutservice
+ 269 │     spec:
+ 270 │       serviceAccountName: checkoutservice
+ 271 │       securityContext:
+ 272 │         fsGroup: 1000
+ 273 │         runAsGroup: 1000
+ 274 │         runAsNonRoot: true
+ 275 │         runAsUser: 1000
+ 276 └       containers:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "currencyservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:43-72
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  43 ┌       containers:
+  44 │       - name: server
+  45 │         securityContext:
+  46 │           allowPrivilegeEscalation: false
+  47 │           capabilities:
+  48 │             drop:
+  49 │               - ALL
+  50 │           privileged: false
+  51 └           readOnlyRootFilesystem: true
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "emailservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:556-586
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 556 ┌   name: emailservice
+ 557 │   labels:
+ 558 │     app: emailservice
+ 559 │ spec:
+ 560 │   selector:
+ 561 │     matchLabels:
+ 562 │       app: emailservice
+ 563 │   template:
+ 564 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "frontend" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:699-766
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 699 ┌   name: paymentservice
+ 700 │ ---
+ 701 │ apiVersion: apps/v1
+ 702 │ kind: Deployment
+ 703 │ metadata:
+ 704 │   name: frontend
+ 705 │   labels:
+ 706 │     app: frontend
+ 707 └ spec:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "paymentservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:628-656
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 628 ┌ apiVersion: apps/v1
+ 629 │ kind: Deployment
+ 630 │ metadata:
+ 631 │   name: paymentservice
+ 632 │   labels:
+ 633 │     app: paymentservice
+ 634 │ spec:
+ 635 │   selector:
+ 636 └     matchLabels:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "productcatalogservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:199-227
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 199 ┌       securityContext:
+ 200 │         fsGroup: 1000
+ 201 │         runAsGroup: 1000
+ 202 │         runAsNonRoot: true
+ 203 │         runAsUser: 1000
+ 204 │       containers:
+ 205 │       - name: server
+ 206 │         securityContext:
+ 207 └           allowPrivilegeEscalation: false
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "recommendationservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:822-854
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 822 ┌     targetPort: 8080
+ 823 │ ---
+ 824 │ apiVersion: v1
+ 825 │ kind: ServiceAccount
+ 826 │ metadata:
+ 827 │   name: frontend
+ 828 │ ---
+ 829 │ apiVersion: apps/v1
+ 830 └ kind: Deployment
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "server" of deployment "shippingservice" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:347-376
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 347 ┌   template:
+ 348 │     metadata:
+ 349 │       labels:
+ 350 │         app: shippingservice
+ 351 │     spec:
+ 352 │       serviceAccountName: shippingservice
+ 353 │       securityContext:
+ 354 │         fsGroup: 1000
+ 355 └         runAsGroup: 1000
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment adservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:875-878
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 875 ┌           value: "productcatalogservice:3550"
+ 876 │         - name: DISABLE_PROFILER
+ 877 │           value: "1"
+ 878 └         resources:
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment cartservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:397-400
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 397 ┌   type: ClusterIP
+ 398 │   selector:
+ 399 │     app: shippingservice
+ 400 └   ports:
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment checkoutservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:248-251
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 248 ┌     targetPort: 3550
+ 249 │ ---
+ 250 │ apiVersion: v1
+ 251 └ kind: ServiceAccount
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment currencyservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:22-25
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  22 ┌ kind: Deployment
+  23 │ metadata:
+  24 │   name: currencyservice
+  25 └   labels:
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment emailservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:535-538
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 535 ┌       - name: redis-data
+ 536 │         emptyDir: {}
+ 537 │ ---
+ 538 └ apiVersion: v1
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment frontend in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:677-680
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 677 ┌           limits:
+ 678 │             cpu: 200m
+ 679 │             memory: 128Mi
+ 680 └ ---
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment loadgenerator in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:93-96
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  93 ┌   name: currencyservice
+  94 │ ---
+  95 │ apiVersion: apps/v1
+  96 └ kind: Deployment
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment paymentservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:607-610
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 607 ┌ ---
+ 608 │ apiVersion: v1
+ 609 │ kind: Service
+ 610 └ metadata:
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment productcatalogservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:178-181
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 178 ┌ kind: ServiceAccount
+ 179 │ metadata:
+ 180 │   name: loadgenerator
+ 181 └ ---
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment recommendationservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:801-804
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 801 ┌   type: ClusterIP
+ 802 │   selector:
+ 803 │     app: frontend
+ 804 └   ports:
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment redis-cart in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:468-471
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 468 ┌   labels:
+ 469 │     app: cartservice
+ 470 │ spec:
+ 471 └   type: ClusterIP
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment shippingservice in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:327-330
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 327 ┌   ports:
+ 328 │   - name: grpc
+ 329 │     port: 5050
+ 330 └     targetPort: 5050
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container main in deployment loadgenerator (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:149-171
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 149 ┌         env:
+ 150 │         - name: FRONTEND_ADDR
+ 151 │           value: "frontend:80"
+ 152 │       containers:
+ 153 │       - name: main
+ 154 │         securityContext:
+ 155 │           allowPrivilegeEscalation: false
+ 156 │           capabilities:
+ 157 └             drop:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment adservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:896-926
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 896 ┌   ports:
+ 897 │   - name: grpc
+ 898 │     port: 8080
+ 899 │     targetPort: 8080
+ 900 │ ---
+ 901 │ apiVersion: v1
+ 902 │ kind: ServiceAccount
+ 903 │ metadata:
+ 904 └   name: recommendationservice
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment cartservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:418-447
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 418 ┌     matchLabels:
+ 419 │       app: cartservice
+ 420 │   template:
+ 421 │     metadata:
+ 422 │       labels:
+ 423 │         app: cartservice
+ 424 │     spec:
+ 425 │       serviceAccountName: cartservice
+ 426 └       terminationGracePeriodSeconds: 5
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment checkoutservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:268-306
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 268 ┌         app: checkoutservice
+ 269 │     spec:
+ 270 │       serviceAccountName: checkoutservice
+ 271 │       securityContext:
+ 272 │         fsGroup: 1000
+ 273 │         runAsGroup: 1000
+ 274 │         runAsNonRoot: true
+ 275 │         runAsUser: 1000
+ 276 └       containers:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment currencyservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:43-72
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  43 ┌       containers:
+  44 │       - name: server
+  45 │         securityContext:
+  46 │           allowPrivilegeEscalation: false
+  47 │           capabilities:
+  48 │             drop:
+  49 │               - ALL
+  50 │           privileged: false
+  51 └           readOnlyRootFilesystem: true
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment emailservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:556-586
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 556 ┌   name: emailservice
+ 557 │   labels:
+ 558 │     app: emailservice
+ 559 │ spec:
+ 560 │   selector:
+ 561 │     matchLabels:
+ 562 │       app: emailservice
+ 563 │   template:
+ 564 └     metadata:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment frontend (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:699-766
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 699 ┌   name: paymentservice
+ 700 │ ---
+ 701 │ apiVersion: apps/v1
+ 702 │ kind: Deployment
+ 703 │ metadata:
+ 704 │   name: frontend
+ 705 │   labels:
+ 706 │     app: frontend
+ 707 └ spec:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment paymentservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:628-656
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 628 ┌ apiVersion: apps/v1
+ 629 │ kind: Deployment
+ 630 │ metadata:
+ 631 │   name: paymentservice
+ 632 │   labels:
+ 633 │     app: paymentservice
+ 634 │ spec:
+ 635 │   selector:
+ 636 └     matchLabels:
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment productcatalogservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:199-227
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 199 ┌       securityContext:
+ 200 │         fsGroup: 1000
+ 201 │         runAsGroup: 1000
+ 202 │         runAsNonRoot: true
+ 203 │         runAsUser: 1000
+ 204 │       containers:
+ 205 │       - name: server
+ 206 │         securityContext:
+ 207 └           allowPrivilegeEscalation: false
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment recommendationservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:822-854
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 822 ┌     targetPort: 8080
+ 823 │ ---
+ 824 │ apiVersion: v1
+ 825 │ kind: ServiceAccount
+ 826 │ metadata:
+ 827 │   name: frontend
+ 828 │ ---
+ 829 │ apiVersion: apps/v1
+ 830 └ kind: Deployment
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0125 (MEDIUM): Container server in deployment shippingservice (namespace: default) uses an image from an untrusted registry.
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Ensure that all containers use images only from trusted registry domains.
+
+See https://avd.aquasec.com/misconfig/ksv-0125
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ kubernetes-manifests.yaml:347-376
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 347 ┌   template:
+ 348 │     metadata:
+ 349 │       labels:
+ 350 │         app: shippingservice
+ 351 │     spec:
+ 352 │       serviceAccountName: shippingservice
+ 353 │       securityContext:
+ 354 │         fsGroup: 1000
+ 355 └         runAsGroup: 1000
+ ...   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+📣 [34mNotices:[0m
+  - Version 0.70.0 of Trivy is now available, current version is 0.69.3
+
+To suppress version checks, run Trivy scans with the --skip-version-check flag
+
